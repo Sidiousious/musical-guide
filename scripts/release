@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+set -e
+set -u
+
+dotnet build MusicalGuide/MusicalGuide.csproj -c Release --output ./out
+
+versionize
+
+# Build again to get correct version number in assembly
+dotnet build MusicalGuide/MusicalGuide.csproj -c Release --output ./out
+git push --follow-tags
+
+VERSION=$(versionize inspect)
+cat << EOF > repository.json
+[
+  {
+    "Author": "YF",
+    "Name": "Musical Guide",
+    "InternalName": "MusicalGuide",
+    "AssemblyVersion": "$VERSION",
+    "Description": "Save and restore camera distance in different situations.",
+    "ApplicableVersion": "any",
+    "RepoUrl": "https://github.com/Sidiousious/musical-guide",
+    "Tags": [
+      "Camera",
+    ],
+    "DalamudApiLevel": 12,
+    "LoadPriority": 0,
+    "DownloadCount": 69,
+    "IconUrl": "https://yfplugins.kinkop.eu/musical-guide.png",
+    "Punchline": "Save and restore camera distance in different situations.",
+    "IsHide": "False",
+    "IsTestingExclusive": "False",
+    "DownloadLinkInstall": "https://yfplugins.kinkop.eu/musical-guide/$VERSION.zip",
+    "DownloadLinkTesting": "https://yfplugins.kinkop.eu/musical-guide/$VERSION.zip",
+    "DownloadLinkUpdate": "https://yfplugins.kinkop.eu/musical-guide/$VERSION.zip"
+  }
+]
+EOF
+
+s3cmd -c ~/.s3cfg-kinkop put out/MusicalGuide/latest.zip s3://yfplugins/musical-guide/$VERSION.zip
+s3cmd -c ~/.s3cfg-kinkop put repository.json s3://yfplugins/musical-guide/repository.json

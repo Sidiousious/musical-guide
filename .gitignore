@@ -1,0 +1,7 @@
+.vs/
+out/
+repository.json
+obj/
+bin/
+*.user
+.idea/

@@ -1,0 +1,10 @@
+{
+    "Author": "YF",
+    "Name": "Musical Guide",
+    "InternalName": "MusicalGuide",
+    "Description": "",
+    "RepoUrl": "https://github.com/Sidiousious/musical-guide",
+    "Tags": ["Camera"],
+    "IconUrl": "https://yfplugins.kinkop.eu/musical-guide.png",
+    "Punchline": "Save and restore camera distance in different situations."
+}
