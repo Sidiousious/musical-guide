@@ -11,11 +11,16 @@ public class CamController(Configuration configuration)
     private const float MaxDist = 20f;
     private const float MinDist = 1.5f;
     private int pendingMountId;
+    private const float MaxDiff = 0.5f;
     
     public static unsafe float Distance => Cam()->Distance;
 
     public void SetDistance(float distance)
     {
+        if (!configuration.Enabled)
+        {
+            return;
+        }
         S.Framework.RunOnFrameworkThread(() =>
         {
             InternalSetDistance(distance);
@@ -24,6 +29,9 @@ public class CamController(Configuration configuration)
 
     private unsafe void InternalSetDistance(float distance, int retry = 0, int retryId = 0)
     {
+        if (distance < MinDist) distance = MinDist;
+        if (distance > MaxDist) distance = MaxDist;
+
         S.Log.Debug($"InternalSetDistance({distance}, {retry}, {retryId})");
         if (!S.Framework.IsInFrameworkUpdateThread)
         {
@@ -70,8 +78,21 @@ public class CamController(Configuration configuration)
             }
         }
 
-        S.Log.Debug($"Setting distance to {distance}");
-        Cam()->Distance = distance;
+        var currentDistance = Cam()->Distance;
+        if (Math.Abs(currentDistance - distance) > MaxDiff)
+        {
+            S.Framework.RunOnTick(() => { InternalSetDistance(distance, 0, retryId); }, TimeSpan.FromMilliseconds(1));
+            var diff = MaxDiff;
+            if (currentDistance > distance) diff *= -1;
+            var newDist = currentDistance + diff;
+            S.Log.Debug($"Setting distance to {newDist}");
+            Cam()->Distance = newDist;
+        }
+        else
+        {
+            S.Log.Debug($"Setting distance to {distance}");
+            Cam()->Distance = distance;
+        }
     }
 
     private static float MountHitboxSize()
