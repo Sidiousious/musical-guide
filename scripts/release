@@ -23,7 +23,7 @@ cat << EOF > repository.json
     "ApplicableVersion": "any",
     "RepoUrl": "https://github.com/Sidiousious/musical-guide",
     "Tags": [
-      "Camera",
+      "Camera"
     ],
     "DalamudApiLevel": 12,
     "LoadPriority": 0,
