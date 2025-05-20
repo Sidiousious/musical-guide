@@ -72,7 +72,7 @@ public sealed partial class MusicalGuide : IDalamudPlugin
         {
             newState = State.InCombat;
         }
-        else if (conditions.Contains(ConditionFlag.Crafting) || conditions.Contains(ConditionFlag.Crafting40))
+        else if (conditions.Contains(ConditionFlag.Crafting) || conditions.Contains(ConditionFlag.ExecutingCraftingAction))
         {
             newState = State.Crafting;
         }
