@@ -10,7 +10,7 @@ public class CamController(Configuration configuration)
 {
     private const float MaxDist = 20f;
     private const float MinDist = 1.5f;
-    private int pendingMountId;
+    private int persistentRetryId;
     private const float MaxDiff = 0.5f;
     
     public static unsafe float Distance => Cam()->Distance;
@@ -39,15 +39,16 @@ public class CamController(Configuration configuration)
             return;
         }
 
-        switch (retry)
-        {
-            case > 0 when pendingMountId != retryId:
-                S.Log.Info("Waiting for mount cancelled");
-                return;
-            case 0:
-                pendingMountId = -1;
-                break;
+        if (retry > 0 && persistentRetryId != retryId) {
+            S.Log.Info("Waiting for mount cancelled");
+            return;
         }
+
+        // Intent here is for new calls to cancel ongoing recursion, so verifying retryId and generating a new one
+        // that the recursion on the next tick can use to verify no overriding call arrived in between the ticks.
+        // This should fix a race condition when entering and exiting states very quickly (ex. sub-second combat scenarios)
+        if (retryId != 0 && retryId != persistentRetryId) return;
+        retryId = persistentRetryId = Random.Shared.Next(int.MaxValue);
 
         if (configuration.UseFurtherCameraForLargerMounts)
         {
@@ -59,12 +60,6 @@ public class CamController(Configuration configuration)
             }
             catch (NotReadyException)
             {
-                if (pendingMountId == -1)
-                {
-                    pendingMountId = Random.Shared.Next(int.MaxValue);
-                    retryId = pendingMountId;
-                }
-
                 if (retry > 3)
                 {
                     S.Log.Info("Did not find mount in time");
