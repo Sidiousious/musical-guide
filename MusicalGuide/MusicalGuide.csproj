@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Dalamud.NET.SDK/12.0.2">
+<Project Sdk="Dalamud.NET.SDK/13.0.0">
     <PropertyGroup>
         <Version>1.0.2</Version>
         <Description>Save and restore camera distance in different situations.</Description>

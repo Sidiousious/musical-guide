@@ -2,7 +2,7 @@
 using System.Numerics;
 using Dalamud.Interface.Windowing;
 using FFXIVClientStructs.FFXIV.Client.Game.Control;
-using ImGuiNET;
+using Dalamud.Bindings.ImGui;
 
 namespace MusicalGuide.Windows;
 

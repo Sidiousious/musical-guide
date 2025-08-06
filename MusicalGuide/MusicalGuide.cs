@@ -64,7 +64,7 @@ public sealed partial class MusicalGuide : IDalamudPlugin
 
         var conditions = S.Condition.AsReadOnlySet();
         var newState = State.OutOfCombat;
-        if (conditions.Contains(ConditionFlag.Mounted) || conditions.Contains(ConditionFlag.Mounted2))
+        if (conditions.Contains(ConditionFlag.Mounted) || conditions.Contains(ConditionFlag.RidingPillion))
         {
             newState = State.Mounted;
         }
