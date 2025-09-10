@@ -68,7 +68,7 @@ public sealed partial class MusicalGuide : IDalamudPlugin
         {
             newState = State.Mounted;
         }
-        else if (conditions.Contains(ConditionFlag.InCombat))
+        else if (conditions.Contains(ConditionFlag.InCombat) || conditions.Contains(ConditionFlag.BoundByDuty))
         {
             newState = State.InCombat;
         }
