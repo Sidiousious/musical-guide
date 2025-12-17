@@ -8,15 +8,15 @@ namespace MusicalGuide;
 public class Configuration : IPluginConfiguration
 {
     public bool Enabled { get; set; } = true;
-    
+
     public bool UseAutomaticDistance { get; set; } = true;
-    
+
     public bool UseFurtherCameraForLargerMounts { get; set; } = true;
-    
+
     // Version for migrations
     public int Version { get; set; } = 1;
 
-    public Dictionary<State, float> Distances = new();
+    public Dictionary<State, float> Distances = [];
 
     public void SetAutomatedDistance(State state, float distance)
     {
@@ -27,7 +27,7 @@ public class Configuration : IPluginConfiguration
     public void SetManualDistance(State state, float distance)
     {
         Distances[state] = distance;
-        Save();   
+        Save();
     }
 
     // the below exist just to make saving less cumbersome

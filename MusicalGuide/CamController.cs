@@ -12,7 +12,7 @@ public class CamController(Configuration configuration)
     private const float MinDist = 1.5f;
     private int persistentRetryId;
     private const float MaxDiff = 0.5f;
-    
+
     public static unsafe float Distance => Cam()->Distance;
 
     public void SetDistance(float distance)
@@ -39,7 +39,8 @@ public class CamController(Configuration configuration)
             return;
         }
 
-        if (retry > 0 && persistentRetryId != retryId) {
+        if (retry > 0 && persistentRetryId != retryId)
+        {
             S.Log.Info("Waiting for mount cancelled");
             return;
         }
@@ -92,7 +93,7 @@ public class CamController(Configuration configuration)
 
     private static float MountHitboxSize()
     {
-        var mountId = S.ClientState.LocalPlayer?.CurrentMount?.ValueNullable?.RowId;
+        var mountId = S.ObjectTable.LocalPlayer?.CurrentMount?.ValueNullable?.RowId;
         if (mountId is null)
         {
             S.Log.Debug("Mount was not found");
@@ -110,7 +111,7 @@ public class CamController(Configuration configuration)
             throw new NotReadyException();
         }
     }
-    
+
     private static unsafe Camera* Cam()
     {
         return CameraManager.Instance()->GetActiveCamera();

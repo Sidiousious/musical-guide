@@ -21,9 +21,9 @@ public sealed partial class MusicalGuide : IDalamudPlugin
     public MusicalGuide(IDalamudPluginInterface pluginInterface)
     {
         pluginInterface.Create<S>();
-        
+
         Configuration = S.PluginInterface.GetPluginConfig() as Configuration ?? new Configuration();
-        
+
         Cam = new CamController(Configuration);
         ConfigWindow = new ConfigWindow(this);
 
@@ -39,7 +39,7 @@ public sealed partial class MusicalGuide : IDalamudPlugin
 
         S.Framework.Update += FrameworkOnUpdateEvent;
     }
-    
+
     private State LatestState { get; set; }
 
     public Configuration Configuration { get; init; }
@@ -60,7 +60,7 @@ public sealed partial class MusicalGuide : IDalamudPlugin
     private void FrameworkOnUpdateEvent(IFramework framework)
     {
         EnsureIsOnFramework();
-        if (!S.ClientState.IsLoggedIn || S.ClientState.LocalPlayer == null) return;
+        if (!S.ClientState.IsLoggedIn || S.ObjectTable.LocalPlayer == null) return;
 
         var conditions = S.Condition.AsReadOnlySet();
         var newState = State.OutOfCombat;
