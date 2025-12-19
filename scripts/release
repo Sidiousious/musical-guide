@@ -25,7 +25,7 @@ cat << EOF > repository.json
     "Tags": [
       "Camera"
     ],
-    "DalamudApiLevel": 12,
+    "DalamudApiLevel": 14,
     "LoadPriority": 0,
     "DownloadCount": 69,
     "IconUrl": "https://yfplugins.kinkop.eu/musical-guide.png",
