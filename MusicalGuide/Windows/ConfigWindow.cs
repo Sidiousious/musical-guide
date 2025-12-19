@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Numerics;
-using Dalamud.Interface.Windowing;
-using FFXIVClientStructs.FFXIV.Client.Game.Control;
 using Dalamud.Bindings.ImGui;
+using Dalamud.Interface.Windowing;
 
 namespace MusicalGuide.Windows;
 
@@ -67,7 +66,7 @@ public class ConfigWindow : Window, IDisposable
         if (ImGui.CollapsingHeader("Camera Distances", ImGuiTreeNodeFlags.DefaultOpen))
         {
             ImGui.Spacing();
-            
+
             var useFurtherCameraForLargerMounts = configuration.UseFurtherCameraForLargerMounts;
             if (ImGui.Checkbox("Use further camera for larger mounts", ref useFurtherCameraForLargerMounts))
             {
@@ -88,7 +87,7 @@ public class ConfigWindow : Window, IDisposable
                     cam.SetDistance(dist);
                 }
             }
-                
+
             ImGui.Spacing();
         }
     }
