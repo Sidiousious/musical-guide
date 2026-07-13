@@ -80,7 +80,7 @@ public sealed partial class MusicalGuide : IDalamudPlugin
                     Title = "Compatibility Notice",
                     Content =
                         "Cammy was loaded after Musical Guide. Loading Cammy after Musical Guide breaks the real first person mode. An automatic fix has been attempted, but you may need to reload Musical Guide yourself, or disable Cammy.",
-                    InitialDuration = TimeSpan.MaxValue
+                    InitialDuration = TimeSpan.FromSeconds(4)
                 });
                 Cam.ReHook();
             }, TimeSpan.FromTicks(1));

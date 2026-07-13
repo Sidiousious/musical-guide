@@ -21,11 +21,11 @@ public class ConfigWindow : Window, IDisposable
     public ConfigWindow(MusicalGuide plugin) : base(
         $"Musical Guide ({plugin.Version.ToString()}) Configuration###MusicalGuideConfig")
     {
-        Size = new Vector2(720, 560) * ImGuiHelpers.GlobalScale;
+        Size = new Vector2(720, 560);
         SizeCondition = ImGuiCond.FirstUseEver;
         SizeConstraints = new WindowSizeConstraints
         {
-            MinimumSize = new Vector2(720, 560) * ImGuiHelpers.GlobalScale,
+            MinimumSize = new Vector2(720, 560),
             MaximumSize = new Vector2(float.MaxValue, float.MaxValue)
         };
 
