@@ -387,7 +387,7 @@ public class CamController : IDisposable
             return false;
 
         // Only derestrict DirV if we are in normal movement state. Flying and diving should still restrict DirV as it is used for movement direction.
-        if (chara->MovementState != MovementStateOptions.Normal)
+        if (chara->MoveController.MovementState != MovementStateOptions.Normal)
             RestoreDirVRestrictions();
         else
             DerestrictDirV();
