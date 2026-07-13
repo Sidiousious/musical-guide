@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [versionize](https://github.com/versionize/versionize) for commit guidelines.
 
+<a name="1.7.0"></a>
+## 1.7.0 (2026-07-13)
+
+### Features
+
+* allow increasing the game object visibility range
+
+### Bug Fixes
+
+* derp
+* obsolete CS prop
+
 <a name="1.6.5"></a>
 ## 1.6.5 (2026-05-21)
 
