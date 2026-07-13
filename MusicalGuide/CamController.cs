@@ -257,7 +257,8 @@ public class CamController : IDisposable
         if (IsMounted)
             goto Original;
 
-        var closeObject = Vector3.Distance(gameObject->Position, *sceneCameraPos) < 4f;
+        var closeObject = Vector3.Distance(gameObject->Position, *sceneCameraPos) <
+                          configuration.FirstPersonCameraCullingDistance;
         if (!closeObject)
             goto Original;
 

@@ -197,6 +197,19 @@ public class ConfigWindow : Window, IDisposable
                     }
                     ImGui.SameLine();
                     ImGuiComponents.HelpMarker("Some races may need to adjust this if their face bone is already rotated from the standard.");
+
+                    var cameraCullingDistance = configuration.FirstPersonCameraCullingDistance;
+                    ImGui.SetNextItemWidth(SliderWidth);
+                    if (ImGui.SliderFloat("Camera culling distance", ref cameraCullingDistance, 4f, 50f, "%.1f",
+                                          ImGuiSliderFlags.AlwaysClamp))
+                    {
+                        configuration.FirstPersonCameraCullingDistance = cameraCullingDistance;
+                        configuration.Save();
+                    }
+
+                    ImGui.SameLine();
+                    ImGuiComponents.HelpMarker(
+                        "Force objects closer than this to be rendered in real first person view. This includes the player character.");
                 }
             }
 

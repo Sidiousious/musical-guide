@@ -62,6 +62,8 @@ internal static unsafe class Debug
             // var changedFloats = changed.Where(o => o % 4 == 0).Select(o => (Offset: o, Value: System.BitConverter.ToSingle(NewBytes, o)));
             // S.Log.Info($"Cam changed at offsets:\n{string.Join("\n", changedFloats.Select(c => $"+{c.Offset:X} (float: {c.Value:F2})"))}");
         }
+
+        S.Log.Info($"Player Rot: {S.ObjectTable.LocalPlayer!.Rotation} - Cam: {CamController.Cam->DirH}");
     }
 #else
     public static void PrintDebug(Configuration configuration)

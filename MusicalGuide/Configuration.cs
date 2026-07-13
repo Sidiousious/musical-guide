@@ -25,6 +25,7 @@ public class Configuration : IPluginConfiguration
     public float FirstPersonHeadOffsetSideward { get; set; } = 0.0f;
     public int FirstPersonHeadRotationPitch { get; set; } = 0;
     public int FirstPersonFieldOfView { get; set; } = 78;
+    public float FirstPersonCameraCullingDistance { get; set; } = 4f;
     public bool ThirdPersonControl { get; set; } = false;
 
     [Newtonsoft.Json.JsonIgnore] // 0.1f and 0.12f are empirical adjustments to better match eye position, based on female miqo'te
