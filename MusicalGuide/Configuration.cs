@@ -24,6 +24,8 @@ public class Configuration : IPluginConfiguration
     public float FirstPersonHeadOffsetUpward { get; set; } = 0.0f;
     public float FirstPersonHeadOffsetSideward { get; set; } = 0.0f;
     public int FirstPersonHeadRotationPitch { get; set; } = 0;
+    public int FirstPersonHeadPitchLimit { get; set; } = 100;
+    public int FirstPersonHeadYawLimit { get; set; } = 120;
     public int FirstPersonFieldOfView { get; set; } = 78;
     public float FirstPersonCameraCullingDistance { get; set; } = 4f;
     public bool ThirdPersonControl { get; set; } = false;

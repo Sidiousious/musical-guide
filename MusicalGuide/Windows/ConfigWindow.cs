@@ -196,7 +196,34 @@ public class ConfigWindow : Window, IDisposable
                         configuration.Save();
                     }
                     ImGui.SameLine();
-                    ImGuiComponents.HelpMarker("Some races may need to adjust this if their face bone is already rotated from the standard.");
+                    ImGuiComponents.HelpMarker(
+                        "You may need to adjust this if your face bone is already rotated from the standard.");
+
+                    var pitchLimit = configuration.FirstPersonHeadPitchLimit;
+                    ImGui.SetNextItemWidth(SliderWidth);
+                    if (ImGui.SliderInt("Maximum vertical angle", ref pitchLimit, 30, 100, "%d",
+                                        ImGuiSliderFlags.AlwaysClamp))
+                    {
+                        configuration.FirstPersonHeadPitchLimit = pitchLimit;
+                        configuration.Save();
+                    }
+
+                    ImGui.SameLine();
+                    ImGuiComponents.HelpMarker(
+                        "You may need to adjust this to prevent looking inside your own head.");
+
+                    var yawLimit = configuration.FirstPersonHeadYawLimit;
+                    ImGui.SetNextItemWidth(SliderWidth);
+                    if (ImGui.SliderInt("Maximum horizontal angle", ref yawLimit, 30, 120, "%d",
+                                        ImGuiSliderFlags.AlwaysClamp))
+                    {
+                        configuration.FirstPersonHeadYawLimit = yawLimit;
+                        configuration.Save();
+                    }
+
+                    ImGui.SameLine();
+                    ImGuiComponents.HelpMarker(
+                        "You may need to adjust this to prevent looking inside your own head.");
 
                     var cameraCullingDistance = configuration.FirstPersonCameraCullingDistance;
                     ImGui.SetNextItemWidth(SliderWidth);

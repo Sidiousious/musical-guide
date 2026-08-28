@@ -33,8 +33,6 @@ public class CamController : IDisposable
     // Lower fps will result in slower camera adjustments, which is intentional to avoid choppiness.
     private const int DelayMs = 16;
 
-    private const int DirVMaxDeg = 100;
-    private const int DirHMaxDeg = 120;
     private const float DefaultDirVMin = -85 * (MathF.PI / 180f);
     private const float DefaultDirVMax = 45 * (MathF.PI / 180f);
     private const float DefaultFoV = 0.78f;
@@ -428,7 +426,9 @@ public class CamController : IDisposable
         var dirH = realDirH + dirHDiff;
 
         // Determine DirV and DirH limits
-        CalculateDirectionRange(bonePitch, DirVMaxDeg, configuration.FirstPersonHeadRotationPitch * DegreesToRadians, out var dirvMin, out var dirvMax);
+        CalculateDirectionRange(bonePitch, configuration.FirstPersonHeadPitchLimit,
+                                configuration.FirstPersonHeadRotationPitch * DegreesToRadians, out var dirvMin,
+                                out var dirvMax);
 
         if (previousTickWasFirstPerson)
         {
@@ -499,7 +499,7 @@ public class CamController : IDisposable
         var isFlippedByGame = Math.Abs(dirV) > StraightUp;
 
         // Handle DirH clamping
-        CalculateDirectionRange(boneYaw, DirHMaxDeg, 0f, out var dirhMin, out var dirhMax);
+        CalculateDirectionRange(boneYaw, configuration.FirstPersonHeadYawLimit, 0f, out var dirhMin, out var dirhMax);
         dirH = RotateDir(dirH);
         if (!reducedMotion)
             dirH = ClampRotational(dirH, dirhMin, dirhMax);
