@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [versionize](https://github.com/versionize/versionize) for commit guidelines.
 
+<a name="1.8.0"></a>
+## 1.8.0 (2026-08-29)
+
+### Features
+
+* allow limiting your camera angles further
+
 <a name="1.7.0"></a>
 ## 1.7.0 (2026-07-13)
 
